@@ -1,8 +1,10 @@
 import {convert_temperature} from '../../utils/convert_temperature.js'
 
-const LIST_UNIT_TEMPERATURE = ['celsius', 'fahrenheit', 'kelvin', 'rankine']
+import {SUPPORTED_TEMPERATURE_UNITS} from "../../constants/temperatura.constants.js"
 
 export function temperatureConversor(req, res) {
+  
+  const LIST_UNIT_TEMPERATURE = Object.keys(SUPPORTED_TEMPERATURE_UNITS)
 
   console.log(req.body)
   const {valor, unit_from, unit_to} = req.body
@@ -26,4 +28,10 @@ export function temperatureConversor(req, res) {
 
   res.status(200).send(result)
 
+}
+
+export function temperatureDisponiveis(req, res) {
+  res.status(200).json({
+    supported_units : SUPPORTED_TEMPERATURE_UNITS
+  })
 }

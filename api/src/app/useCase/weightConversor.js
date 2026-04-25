@@ -1,8 +1,10 @@
 import {convert_weight} from '../../utils/convert_weight.js'
+import { SUPPORTED_WEIGHT_UNITS } from "../../constants/weight.constants.js"
 
-const LIST_UNIT_WEIGHT = ['tonelada', 'quilograma', 'grama', 'miligrama', 'micrograma']
 
 export function weightConversor(req, res) {
+
+ const LIST_UNIT_WEIGHT = Object.keys(SUPPORTED_WEIGHT_UNITS)
 
   console.log(req.body)
   const {valor, unit_from, unit_to} = req.body
@@ -26,4 +28,10 @@ export function weightConversor(req, res) {
 
   res.status(200).send(result)
 
+}
+
+export function weightDisponiveis(req, res) {
+  res.status(200).json({
+    supported_units : SUPPORTED_WEIGHT_UNITS
+  })
 }

@@ -1,17 +1,12 @@
 import {convert_size} from '../../utils/convert_length.js'
 
-const LIST_UNIT_LENGTH = [
-  'quilometro', 
-  'metro', 
-  'centimetro', 
-  'milimetro', 
-  'micrometro', 
-  'milha', 
-  'jarda',
-  'pe',
-  'polegada' ]
+import {SUPPORTED_LENGTH_UNITS} from "../../constants/length.constants.js"
+
+
 
 export function lengthConversor(req, res) {
+  
+  const LIST_UNIT_LENGTH = Object.keys(SUPPORTED_LENGTH_UNITS)
 
   console.log(req.body)
   const {valor, unit_from, unit_to} = req.body
@@ -35,4 +30,10 @@ export function lengthConversor(req, res) {
 
   res.status(200).send(result)
 
+}
+
+export function lengthDisponiveis(req, res) {
+  res.status(200).json({
+    supported_units : SUPPORTED_LENGTH_UNITS
+  })
 }
