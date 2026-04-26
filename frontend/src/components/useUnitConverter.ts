@@ -77,7 +77,7 @@ function useUnitConverter() {
     console.log(formData)
 
     const conteudo : IcalculateConversion = {
-      value: formData.value,
+      valor: formData.value,
       unit_from: formData.unitFrom,
       unit_to: formData.unitTo, 
       unit :activeTab
