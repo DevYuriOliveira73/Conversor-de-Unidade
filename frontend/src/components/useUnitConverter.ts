@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react'
 
-import {getWeightParams} from '../services/weight/weightService'
+import {getSupportedUnits} from '../services/unitService'
 import {type Category}  from '../type/category';
 import { type ISelectOption } from '../type/selectOption';
 
@@ -25,7 +25,7 @@ function useUnitConverter() {
   useEffect(() => {
   const fetchSelectOptions = async () => {
     try {
-      const { data: params } = await getWeightParams(activeTab);
+      const { data: params } = await getSupportedUnits(activeTab);
 
       const optionValues = Object.keys(params);
       const optionLabels: string[] = Object.values(params);
