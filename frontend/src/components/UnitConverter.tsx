@@ -5,7 +5,7 @@ import useUnitConverter from './useUnitConverter'
 
 export default function UnitConverter () {
 
-  const {activeTab, setActiveTab, tabs, formData, onHandleInput, selectOptions} = useUnitConverter()
+  const {activeTab, setActiveTab, tabs, formData, onHandleInput, selectOptions, handleConvert} = useUnitConverter()
 
   return (
     <section className="w-screen h-screen bg-gray-50 flex items-center justify-center">
@@ -33,7 +33,10 @@ export default function UnitConverter () {
         </ul>
 
         {/* Form */}
-        <form className="flex flex-col gap-4">
+        <form 
+          className="flex flex-col gap-4"
+          onSubmit={handleConvert}
+        >
           
           <UnitText
             activeTab={activeTab}
@@ -50,7 +53,7 @@ export default function UnitConverter () {
           />
           <UnitSelect  
             selectOptions={selectOptions}
-            value= {formData.unitFrom}
+            value= {formData.unitTo}
             name="unitTo"
             onChange={onHandleInput} 
           />

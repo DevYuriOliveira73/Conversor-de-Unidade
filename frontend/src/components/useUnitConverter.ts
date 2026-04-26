@@ -3,6 +3,8 @@ import {useState, useEffect} from 'react'
 import {getSupportedUnits} from '../services/unitService'
 import {type Category}  from '../type/category';
 import { type ISelectOption } from '../type/selectOption';
+import {calculateConversion} from '../services/conversionService'
+import { type IcalculateConversion } from "../type/calculateConversion";
 
 
 
@@ -11,16 +13,18 @@ function useUnitConverter() {
   const [activeTab, setActiveTab] = useState<Category>("length");
   const [selectOptions, setSelectOptions] = useState<ISelectOption[]>([]);
 
-
   const [formData, setFormData] = useState({
-    value: 0,
+    value: "",
     unitFrom: "",
     unitTo: "",
   });
 
   useEffect(() => {
-  console.log(selectOptions);
-  }, [selectOptions]);
+    console.log(selectOptions);
+    console.log(formData)
+
+  }, [selectOptions, formData]);
+
 
   useEffect(() => {
   const fetchSelectOptions = async () => {
@@ -36,6 +40,14 @@ function useUnitConverter() {
           label: optionLabels[index],
         };
       });
+
+      setFormData((prev) => ({
+        ...prev,
+        unitFrom :optionValues[0],
+        unitTo : optionValues[0]
+        
+      }));
+      console.log(`NAO ERA PRA FUNCIONAR`)
 
       setSelectOptions(options);
     } catch (error) {
@@ -56,10 +68,25 @@ function useUnitConverter() {
     
     setFormData((prev) => ({
       ...prev,
-      [name]: (name === "value" ? Number(value) : value),
+      [name]:  value,
     }));
   };
 
+  const handleConvert = async (event: React.SubmitEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    console.log(formData)
+
+    const conteudo : IcalculateConversion = {
+      value: formData.value,
+      unit_from: formData.unitFrom,
+      unit_to: formData.unitTo, 
+      unit :activeTab
+    }
+
+    const response = await calculateConversion(conteudo)
+
+    console.log(response)
+  }
 
   const tabs: { label: string; value: Category }[] = [
     { label: "Length", value: "length" },
@@ -76,7 +103,8 @@ function useUnitConverter() {
     onHandleInput,
 
     
-    selectOptions
+    selectOptions,
+    handleConvert
   }
 }
 

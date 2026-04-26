@@ -7,7 +7,7 @@ interface IUnitSelect {
   value: string;
 }
 
-function UnitSelect({selectOptions,value,  onChange, name }: IUnitSelect) {
+function UnitSelect({selectOptions, value, onChange, name }: IUnitSelect) {
 
   const direction = name === "unitFrom" ? "from" : "to"
 
@@ -34,4 +34,4 @@ function UnitSelect({selectOptions,value,  onChange, name }: IUnitSelect) {
   )
 }
 
-export default UnitSelect
+export default UnitSelect;

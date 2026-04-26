@@ -1,8 +1,7 @@
 interface IUnitText {
   activeTab : string;
-  value: number;
+  value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  unit? : string;
 }
 
 function UnitText ({activeTab, value, onChange} : IUnitText) {
@@ -16,6 +15,7 @@ function UnitText ({activeTab, value, onChange} : IUnitText) {
         value= {value}
         name="value"
         onChange={onChange}
+        placeholder="Enter the value"
       />
     </div>
   )
