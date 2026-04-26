@@ -1,5 +1,9 @@
 import {useState, useEffect} from 'react'
 
+import {getWeightParams} from '../services/weight/weightService'
+
+
+
 type Category = "length" | "weight" | "temperature";
 
 function useUnitConverter() {
@@ -35,13 +39,30 @@ function useUnitConverter() {
     { label: "Temperature", value: "temperature" },
   ];
 
+  const getParams = async (event: any) =>{
+    event.preventDefault()
+    try {
+      
+      
+      const params =  await getWeightParams()
+  
+      console.log(params)
+    } catch (error) {
+
+      console.log("ERROR", error)
+
+    }
+  }
+
   return {
     activeTab,
     setActiveTab,
     tabs,
     formData, 
     setFormData,
-    onHandleInput
+    onHandleInput,
+
+    getParams
   }
 }
 
