@@ -1,10 +1,9 @@
 import { httpClient } from "../httpClient";
+import { type Category } from "../../type/category";
 
+export async function getWeightParams(unit : Category) {
 
-export async function getWeightParams() {
-console.log(httpClient.head)
-
-  const params = await httpClient.get('/weight')
+  const params = await httpClient.get(`/${unit}`)
 
   return params
 }

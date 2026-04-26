@@ -5,7 +5,7 @@ import useUnitConverter from './useUnitConverter'
 
 export default function UnitConverter () {
 
-  const {activeTab, setActiveTab, tabs, formData, onHandleInput, getParams} = useUnitConverter()
+  const {activeTab, setActiveTab, tabs, formData, onHandleInput, selectOptions} = useUnitConverter()
 
   return (
     <section className="w-screen h-screen bg-gray-50 flex items-center justify-center">
@@ -43,14 +43,14 @@ export default function UnitConverter () {
           />
           
           <UnitSelect  
-            options={["km", "m", "cm"]}
+            selectOptions={selectOptions}
             value= {formData.unitFrom}
             name="unitFrom"
             onChange={onHandleInput}
           />
           <UnitSelect  
-            options={["km", "m", "cm"]}
-            value= {formData.unitTo}
+            selectOptions={selectOptions}
+            value= {formData.unitFrom}
             name="unitTo"
             onChange={onHandleInput} 
           />
@@ -61,12 +61,6 @@ export default function UnitConverter () {
             className="mt-2 bg-blue-600 text-white rounded-lg py-2 font-medium hover:bg-blue-700 transition-colors"
           >
             Convert
-          </button>
-          <button
-            className='my-2 bg-sky-100'
-            onClick={getParams}
-          >
-            Request weight
           </button>
         </form>
       </div>

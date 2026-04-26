@@ -1,12 +1,16 @@
 import {useState, useEffect} from 'react'
 
 import {getWeightParams} from '../services/weight/weightService'
+import {type Category}  from '../type/category';
+import { type ISelectOption } from '../type/selectOption';
 
 
-
-type Category = "length" | "weight" | "temperature";
 
 function useUnitConverter() {
+
+  const [activeTab, setActiveTab] = useState<Category>("length");
+  const [selectOptions, setSelectOptions] = useState<ISelectOption[]>([]);
+
 
   const [formData, setFormData] = useState({
     value: 0,
@@ -15,8 +19,33 @@ function useUnitConverter() {
   });
 
   useEffect(() => {
-  console.log(formData);
-}, [formData]);
+  console.log(selectOptions);
+  }, [selectOptions]);
+
+  useEffect(() => {
+  const fetchSelectOptions = async () => {
+    try {
+      const { data: params } = await getWeightParams(activeTab);
+
+      const optionValues = Object.keys(params);
+      const optionLabels: string[] = Object.values(params);
+
+      const options : ISelectOption[] = optionValues.map((value, index) => {
+        return {
+          value,
+          label: optionLabels[index],
+        };
+      });
+
+      setSelectOptions(options);
+    } catch (error) {
+      console.log("ERROR", error);
+    }
+  };
+
+  fetchSelectOptions();
+}, [activeTab]);
+
 
   const onHandleInput = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -31,28 +60,12 @@ function useUnitConverter() {
     }));
   };
 
-  const [activeTab, setActiveTab] = useState<Category>("length");
 
   const tabs: { label: string; value: Category }[] = [
     { label: "Length", value: "length" },
     { label: "Weight", value: "weight" },
     { label: "Temperature", value: "temperature" },
   ];
-
-  const getParams = async (event: any) =>{
-    event.preventDefault()
-    try {
-      
-      
-      const params =  await getWeightParams()
-  
-      console.log(params)
-    } catch (error) {
-
-      console.log("ERROR", error)
-
-    }
-  }
 
   return {
     activeTab,
@@ -62,7 +75,8 @@ function useUnitConverter() {
     setFormData,
     onHandleInput,
 
-    getParams
+    
+    selectOptions
   }
 }
 

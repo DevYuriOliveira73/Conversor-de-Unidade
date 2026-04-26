@@ -1,11 +1,13 @@
+import { type ISelectOption } from "../../type/selectOption";
+
 interface IUnitSelect {
-  options: string[];
-  value: string;
+  selectOptions: ISelectOption[];
   name: string;
   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  value: string;
 }
 
-function UnitSelect({options, value, onChange, name }: IUnitSelect) {
+function UnitSelect({selectOptions,value,  onChange, name }: IUnitSelect) {
 
   const direction = name === "unitFrom" ? "from" : "to"
 
@@ -22,15 +24,14 @@ function UnitSelect({options, value, onChange, name }: IUnitSelect) {
           focus:outline-none focus:ring-2 focus:ring-blue-500
         "
       >
-        {options.map((option) => (
-          <option key={option} value={option}>
-            {option}
+        {selectOptions.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
           </option>
         ))}
       </select>
     </div>
   )
 }
-
 
 export default UnitSelect

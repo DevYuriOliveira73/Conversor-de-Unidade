@@ -1,0 +1,1 @@
+export type Category = "length" | "weight" | "temperature";
