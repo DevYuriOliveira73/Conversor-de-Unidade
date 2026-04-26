@@ -10,6 +10,7 @@ import { type IcalculateConversion } from "../type/calculateConversion";
 
 function useUnitConverter() {
 
+  const [result, setResult] = useState<number | null>()
   const [activeTab, setActiveTab] = useState<Category>("length");
   const [selectOptions, setSelectOptions] = useState<ISelectOption[]>([]);
 
@@ -85,6 +86,8 @@ function useUnitConverter() {
 
     const response = await calculateConversion(conteudo)
 
+    setResult(response?.data)
+
     console.log(response)
   }
 
@@ -94,6 +97,8 @@ function useUnitConverter() {
     { label: "Temperature", value: "temperature" },
   ];
 
+  const handleCloseResult = () => setResult(null)
+
   return {
     activeTab,
     setActiveTab,
@@ -102,7 +107,8 @@ function useUnitConverter() {
     setFormData,
     onHandleInput,
 
-    
+    handleCloseResult,
+    result,
     selectOptions,
     handleConvert
   }
