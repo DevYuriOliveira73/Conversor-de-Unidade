@@ -34,6 +34,6 @@ export function lengthConversor(req, res) {
 
 export function lengthDisponiveis(req, res) {
   res.status(200).json({
-    supported_units : SUPPORTED_LENGTH_UNITS
+    ...SUPPORTED_LENGTH_UNITS
   })
 }

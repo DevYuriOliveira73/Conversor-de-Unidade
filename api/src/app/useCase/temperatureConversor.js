@@ -32,6 +32,6 @@ export function temperatureConversor(req, res) {
 
 export function temperatureDisponiveis(req, res) {
   res.status(200).json({
-    supported_units : SUPPORTED_TEMPERATURE_UNITS
+    ...SUPPORTED_TEMPERATURE_UNITS
   })
 }

@@ -31,7 +31,10 @@ export function weightConversor(req, res) {
 }
 
 export function weightDisponiveis(req, res) {
+
+  console.log(`Bateu aqui`)
+
   res.status(200).json({
-    supported_units : SUPPORTED_WEIGHT_UNITS
+    ...SUPPORTED_WEIGHT_UNITS
   })
 }
