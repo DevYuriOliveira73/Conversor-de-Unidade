@@ -48,8 +48,8 @@ function useUnitConverter() {
         unitTo : optionValues[0]
         
       }));
-      console.log(`NAO ERA PRA FUNCIONAR`)
-
+      
+      setResult(null)
       setSelectOptions(options);
     } catch (error) {
       console.log("ERROR", error);

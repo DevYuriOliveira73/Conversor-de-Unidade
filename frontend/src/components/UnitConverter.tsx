@@ -67,7 +67,12 @@ export default function UnitConverter () {
           </button>
 
           {result !== null && (
-            <ResultComponent/>
+            <ResultComponent
+              result = {result}
+              unitFrom ={formData.unitFrom}
+              unitTo = {formData.unitTo}
+              handleCloseResult={handleCloseResult}
+            />
           )}
         </form>
       </div>
