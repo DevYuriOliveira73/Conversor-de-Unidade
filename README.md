@@ -2,6 +2,8 @@
 
 A aplicação permite converter valores entre diferentes categorias de medida, como peso, comprimento e temperatura.
 
+Project URL: [URL projeto](https://github.com/DevYuriOliveira73/Conversor-de-Unidade)
+
 ## Tecnologias utilizadas
 
 ### Front-end
